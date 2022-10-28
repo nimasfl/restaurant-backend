@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Login to docker registry
+        run: docker login ${{ secrets.DOCKER_REGISTRY_HOST }} -u ${{ secrets.DOCKER_REGISTRY_USER }} -p ${{ secrets.DOCKER_REGISTRY_SECRET }}
+
+      - name: Build docker image
+        run: docker build . -f .github/Dockerfile -t registry.nimasfl.ir/restaurant-backend:latest
+
+      - name: Push docker image
+        run: docker push registry.nimasfl.ir/restaurant-backend:latest
