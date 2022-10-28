@@ -19,7 +19,9 @@ jobs:
         uses: actions/checkout@master
 
       - name: Login to docker registry
-        run: docker login ${{ secrets.DOCKER_REGISTRY_HOST }} -u ${{ secrets.DOCKER_REGISTRY_USER }} -p ${{ secrets.DOCKER_REGISTRY_SECRET }}
+#        run: docker login ${{ secrets.DOCKER_REGISTRY_HOST }} -u ${{ secrets.DOCKER_REGISTRY_USER }} -p ${{ secrets.DOCKER_REGISTRY_SECRET }}
+        run: echo ${{ secrets.DOCKER_REGISTRY_SECRET }} | docker login --username ${{ secrets.DOCKER_REGISTRY_USER }} --password-stdin secrets.DOCKER_REGISTRY_HOST
+
 
       - name: Build docker image
         run: docker build . -f .github/Dockerfile -t registry.nimasfl.ir/restaurant-backend:latest
