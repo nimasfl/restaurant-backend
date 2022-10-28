@@ -133,7 +133,7 @@ public static class ServiceCollectionExtensionMethods
                 policy.AllowCredentials();
                 policy.WithHeaders("*");
                 policy.WithMethods("*");
-                policy.WithOrigins("https://localhost:8080");
+                policy.WithOrigins("https://localhost:8080", "https://restaurant.nimasfl.ir");
             })
         );
     }
