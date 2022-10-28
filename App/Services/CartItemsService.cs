@@ -61,7 +61,8 @@ public class CartItemsService
                 FoodName = c.Food.Name,
                 FoodId = c.FoodId,
                 Price = c.Food.Price,
-                Count = c.Count
+                Count = c.Count,
+                ImageUrl = c.Food.ImageUrl
             })
             .ToListAsync();
     }
